@@ -12,8 +12,8 @@ function cardAdd(name, link, deleteCard) {
     const deleteButton = card.querySelector('.card__delete-button');
     deleteButton.addEventListener('click', deleteCard);
     card.querySelector('.card__title').textContent = name;
-    card.querySelector('card__image').src = link;
-    card.querySelector('card__image').alt = name;
+    card.querySelector('.card__image').src = link;
+    card.querySelector('.card__image').alt = name;
     return card;
 }
 
