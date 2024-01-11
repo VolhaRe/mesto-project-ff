@@ -1,8 +1,8 @@
 import "./pages/index.css";
 import "./blocks/card/card.css";
-import { initialCards } from "./components/cards";
+import { initialCards } from "./components/InitialCards";
 import { openModal, closeModal } from "./components/modal";
-import { createCards, deleteCard } from "./components/cards";
+import { createCard, deleteCard } from "./components/cards";
 
 // @todo: DOM узлы
 const placesList = document.querySelector(".places__list");
@@ -12,14 +12,14 @@ const popupEditProfileCLose = popupEditProfile.querySelector(".popup__close"); /
 const popupAddCard = document.querySelector(".popup_type_new-card"); //попап добавить карточку
 const buttonAddCard = document.querySelector(".profile__add-button"); //кнопка добавить карточку
 const popupAddCardClose = popupAddCard.querySelector(".popup__close"); //кнопка закрытия попапа доб.карточку
-const popupTypeImage = document.querySelector(".popup_type_image"); // попап картинка фулскрин
-const popupImage = document.querySelector(".popup__image"); //картинка фулскрин
-const popupCaption = document.querySelector(".popup__caption"); // название картинки попапа фцлскрин
+export const popupTypeImage = document.querySelector(".popup_type_image"); // попап картинка фулскрин
+export const popupImage = document.querySelector(".popup__image"); //картинка фулскрин
+export const popupCaption = document.querySelector(".popup__caption"); // название картинки попапа фцлскрин
 const popupTypeImageClose = popupTypeImage.querySelector(".popup__close"); // кнопка закрытия модального окна картинка фулскрин
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach((item) =>
-    placesList.append(createCards(item.name, item.link, deleteCard))
+    placesList.append(createCard(item.name, item.link, deleteCard))
 );
 
 //форма ред.профиль
@@ -28,16 +28,15 @@ export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(".popup__input_type_description");
 export const profileTitle = document.querySelector(".profile__title");
 export const profileDiscription = document.querySelector(".profile__description");
-nameInput.value = profileTitle.textContent;
-jobInput.value = profileDiscription.textContent;
 
-function handleFormSubmit(evt) {
+
+function submitFormEditButton(evt) {
     evt.preventDefault();
     profileTitle.textContent = nameInput.value;
     profileDiscription.textContent = jobInput.value;
     closeModal(popupEditProfile);
 }
-formEditProfile.addEventListener("submit", handleFormSubmit);
+formEditProfile.addEventListener("submit", submitFormEditButton);
 
 //Форма создания новой карточки
 const formNewCard = document.querySelector(".popup_type_new-card"); //форма для доб. новой карточки
@@ -46,27 +45,24 @@ const newCardlinkInput = formNewCard.querySelector(".popup__input_type_url"); //
 const formInsidePopupNewCard = formNewCard.querySelector(".popup__form");
 function addNewCard(evt) {
     evt.preventDefault();
-    const newCard = createCards(
+    const newCard = createCard(
         newCardnameInput.value,
         newCardlinkInput.value,
         deleteCard
     );
     placesList.prepend(newCard);
-    closeModal(document.querySelector(".popup_is-opened"));
+    closeModal(popupAddCard);
     formInsidePopupNewCard.reset();
 }
 formNewCard.addEventListener("submit", addNewCard);
 
-//функция открытия попапа картинки
-export function openImage(name, link) {
-    popupImage.src = link; //присвоили ссылку на картинку в попап
-    popupCaption.textContent = name; // присвоили текст
-    openModal(popupTypeImage);
-}
+
 
 // Слушатели на кнопках
 //слушатель открытия модального окна ред.проф
 buttonEditProfile.addEventListener("click", function () {
+    nameInput.value = profileTitle.textContent;
+    jobInput.value = profileDiscription.textContent;
     openModal(popupEditProfile);
 });
 

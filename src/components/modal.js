@@ -2,22 +2,21 @@ import {
     nameInput,
     profileTitle,
     jobInput,
-    profileDiscription,
+    profileDiscription, popupImage, popupCaption, popupTypeImage
 } from "../index";
 
-export function openModal(evt) {
-    evt.classList.add("popup_is-opened");
-    evt.classList.add("popup_is-animated");
-    evt.addEventListener("click", closeOverlay);
+export function openModal(popup) {
+    popup.classList.add("popup_is-opened");
+    popup.classList.add("popup_is-animated");
+    popup.addEventListener("mousedown", closeOverlay);
     document.addEventListener("keydown", closeEscape);
 }
 
-export function closeModal(evt) {
-    evt.classList.remove("popup_is-opened");
-    evt.removeEventListener("click", closeOverlay);
+export function closeModal(popup) {
+    popup.classList.remove("popup_is-opened");
+    popup.removeEventListener("mousedown", closeOverlay);
     document.removeEventListener("keydown", closeEscape);
-    nameInput.value = profileTitle.textContent;
-    jobInput.value = profileDiscription.textContent;
+    
 }
 
 export function closeOverlay(evt) {
@@ -32,4 +31,12 @@ export function closeEscape(evt) {
             closeModal(document.querySelector(".popup_is-opened"));
         }
     }
+}
+
+//функция открытия попапа картинки
+export function openImage(name, link) {
+    popupImage.src = link; //присвоили ссылку на картинку в попап
+    popupCaption.textContent = name; // присвоили текст
+    popupImage.alt = name;
+    openModal(popupTypeImage);
 }
