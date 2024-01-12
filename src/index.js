@@ -2,7 +2,7 @@ import "./pages/index.css";
 import "./blocks/card/card.css";
 import { initialCards } from "./components/InitialCards";
 import { openModal, closeModal } from "./components/modal";
-import { createCard, deleteCard } from "./components/cards";
+import { createCard, deleteCard, like } from "./components/cards";
 
 // @todo: DOM узлы
 const placesList = document.querySelector(".places__list");
@@ -19,7 +19,7 @@ const popupTypeImageClose = popupTypeImage.querySelector(".popup__close"); // к
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach((item) =>
-    placesList.append(createCard(item.name, item.link, deleteCard))
+    placesList.append(createCard(item.name, item.link, deleteCard, openImage, like))
 );
 
 //форма ред.профиль
@@ -48,7 +48,7 @@ function addNewCard(evt) {
     const newCard = createCard(
         newCardnameInput.value,
         newCardlinkInput.value,
-        deleteCard
+        deleteCard, openImage, like
     );
     placesList.prepend(newCard);
     closeModal(popupAddCard);
@@ -56,7 +56,13 @@ function addNewCard(evt) {
 }
 formNewCard.addEventListener("submit", addNewCard);
 
-
+//функция открытия попапа картинки
+function openImage(name, link) {
+    popupImage.src = link; //присвоили ссылку на картинку в попап
+    popupCaption.textContent = name; // присвоили текст
+    popupImage.alt = name;
+    openModal(popupTypeImage);
+}
 
 // Слушатели на кнопках
 //слушатель открытия модального окна ред.проф

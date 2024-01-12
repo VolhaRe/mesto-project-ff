@@ -33,10 +33,3 @@ export function closeEscape(evt) {
     }
 }
 
-//функция открытия попапа картинки
-export function openImage(name, link) {
-    popupImage.src = link; //присвоили ссылку на картинку в попап
-    popupCaption.textContent = name; // присвоили текст
-    popupImage.alt = name;
-    openModal(popupTypeImage);
-}
