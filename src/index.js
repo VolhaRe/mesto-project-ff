@@ -30,13 +30,13 @@ export const profileTitle = document.querySelector(".profile__title");
 export const profileDiscription = document.querySelector(".profile__description");
 
 
-function submitFormEditButton(evt) {
+function submitpProfileForm(evt) {
     evt.preventDefault();
     profileTitle.textContent = nameInput.value;
     profileDiscription.textContent = jobInput.value;
     closeModal(popupEditProfile);
 }
-formEditProfile.addEventListener("submit", submitFormEditButton);
+formEditProfile.addEventListener("submit", submitpProfileForm);
 
 //Форма создания новой карточки
 const formNewCard = document.querySelector(".popup_type_new-card"); //форма для доб. новой карточки

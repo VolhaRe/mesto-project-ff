@@ -1,4 +1,4 @@
-import {openImage} from './modal'
+
 
 
 // @todo: Темплейт карточки
